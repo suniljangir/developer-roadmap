@@ -119,15 +119,13 @@ const projects = await getProjectsByRoadmapId(roadmapId);
     <div class='container mt-2.5'>
       <div class='rounded-md border bg-white'>
         <ResourceProgressStats resourceId={roadmapId} resourceType='roadmap' />
-        {
-          question?.title && (
-            <RoadmapTitleQuestion
-              client:load
-              question={question?.title}
-              answer={question?.description}
-            />
-          )
-        }
+        {Array.isArray(question) && question.map((question: { title: string; description: string; }) => (
+          <RoadmapTitleQuestion
+            client:load
+            question={question?.title}
+            answer={question?.description}
+          />
+        ))}
       </div>
     </div>
 
